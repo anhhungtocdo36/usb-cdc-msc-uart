@@ -97,7 +97,7 @@ static void USBD_SetFeature(USBD_HandleTypeDef *pdev ,
 static void USBD_ClrFeature(USBD_HandleTypeDef *pdev , 
                             USBD_SetupReqTypedef *req);
 
-static uint8_t USBD_GetLen(uint8_t *buf);
+static uint8_t USBD_GetLen(const char *buf);
 
 /**
   * @}
@@ -306,7 +306,7 @@ USBD_StatusTypeDef  USBD_StdEPReq (USBD_HandleTypeDef *pdev , USBD_SetupReqTyped
       }
       
       USBD_CtlSendData (pdev,
-                        (uint8_t *)&pep->status,
+                        (const uint8_t *)&pep->status,
                         2);
       break;
       
@@ -332,7 +332,7 @@ static void USBD_GetDescriptor(USBD_HandleTypeDef *pdev ,
                                USBD_SetupReqTypedef *req)
 {
   uint16_t len;
-  uint8_t *pbuf;
+  const uint8_t *pbuf;
   
     
   switch (req->wValue >> 8)
@@ -347,16 +347,7 @@ static void USBD_GetDescriptor(USBD_HandleTypeDef *pdev ,
     break;
     
   case USB_DESC_TYPE_CONFIGURATION:     
-    if(pdev->dev_speed == USBD_SPEED_HIGH )   
-    {
-      pbuf   = (uint8_t *)pdev->pClass->GetHSConfigDescriptor(&len);
-      pbuf[1] = USB_DESC_TYPE_CONFIGURATION;
-    }
-    else
-    {
-      pbuf   = (uint8_t *)pdev->pClass->GetFSConfigDescriptor(&len);
-      pbuf[1] = USB_DESC_TYPE_CONFIGURATION;
-    }
+	pbuf   = (uint8_t *)pdev->pClass->GetFSConfigDescriptor(&len);
     break;
     
   case USB_DESC_TYPE_STRING:
@@ -410,20 +401,11 @@ static void USBD_GetDescriptor(USBD_HandleTypeDef *pdev ,
     } 
 
   case USB_DESC_TYPE_OTHER_SPEED_CONFIGURATION:
-    if(pdev->dev_speed == USBD_SPEED_HIGH  )   
-    {
-      pbuf   = (uint8_t *)pdev->pClass->GetOtherSpeedConfigDescriptor(&len);
-      pbuf[1] = USB_DESC_TYPE_OTHER_SPEED_CONFIGURATION;
-      break; 
-    }
-    else
-    {
-      USBD_CtlError(pdev , req);
-      return;
-    }
+	USBD_CtlError(pdev , req);
+	return;
 
   default: 
-     USBD_CtlError(pdev , req);
+	USBD_CtlError(pdev , req);
     return;
   }
   
@@ -580,14 +562,14 @@ static void USBD_GetConfig(USBD_HandleTypeDef *pdev ,
     case USBD_STATE_ADDRESSED:                     
       pdev->dev_default_config = 0;
       USBD_CtlSendData (pdev, 
-                        (uint8_t *)&pdev->dev_default_config,
+                        (const uint8_t *)&pdev->dev_default_config,
                         1);
       break;
       
     case USBD_STATE_CONFIGURED:   
       
       USBD_CtlSendData (pdev, 
-                        (uint8_t *)&pdev->dev_config,
+                        (const uint8_t *)&pdev->dev_config,
                         1);
       break;
       
@@ -627,7 +609,7 @@ static void USBD_GetStatus(USBD_HandleTypeDef *pdev ,
     }
     
     USBD_CtlSendData (pdev, 
-                      (uint8_t *)& pdev->dev_config_status,
+                      (const uint8_t *)& pdev->dev_config_status,
                       2);
     break;
     
@@ -729,7 +711,7 @@ void USBD_CtlError( USBD_HandleTypeDef *pdev ,
   * @param  len : descriptor length
   * @retval None
   */
-void USBD_GetString(uint8_t *desc, uint8_t *unicode, uint16_t *len)
+void USBD_GetString(const char *desc, uint8_t *unicode, uint16_t *len)
 {
   uint8_t idx = 0;
   
@@ -753,7 +735,7 @@ void USBD_GetString(uint8_t *desc, uint8_t *unicode, uint16_t *len)
    * @param  buf : pointer to the ascii string buffer
   * @retval string length
   */
-static uint8_t USBD_GetLen(uint8_t *buf)
+static uint8_t USBD_GetLen(const char *buf)
 {
     uint8_t  len = 0;
 

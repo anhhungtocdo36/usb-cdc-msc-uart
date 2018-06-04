@@ -110,9 +110,10 @@
 
 #define USB_DEVICE_CAPABITY_TYPE                           0x10
 
-#define USB_HS_MAX_PACKET_SIZE                            512
-#define USB_FS_MAX_PACKET_SIZE                            64
+#define USB_MAX_PACKET_SIZE                               64
 #define USB_MAX_EP0_SIZE                                  64
+#define CDC_CMD_PACKET_SIZE		                          8  /* Control Endpoint Packet size */
+#define CDC_DATA_PACKET_SIZE		                      USB_MAX_PACKET_SIZE
 
 /*  Device Status */
 #define USBD_STATE_DEFAULT                                1
@@ -172,10 +173,8 @@ typedef struct _Device_cb
   uint8_t  (*IsoINIncomplete)  (struct _USBD_HandleTypeDef *pdev , uint8_t epnum); 
   uint8_t  (*IsoOUTIncomplete) (struct _USBD_HandleTypeDef *pdev , uint8_t epnum);   
 
-  uint8_t  *(*GetHSConfigDescriptor)(uint16_t *length); 
-  uint8_t  *(*GetFSConfigDescriptor)(uint16_t *length);   
-  uint8_t  *(*GetOtherSpeedConfigDescriptor)(uint16_t *length);
-  uint8_t  *(*GetDeviceQualifierDescriptor)(uint16_t *length);
+  const uint8_t  *(*GetFSConfigDescriptor)(uint16_t *length);
+  const uint8_t  *(*GetDeviceQualifierDescriptor)(uint16_t *length);
 #if (USBD_SUPPORT_USER_STRING == 1)
   uint8_t  *(*GetUsrStrDescriptor)(struct _USBD_HandleTypeDef *pdev ,uint8_t index,  uint16_t *length);   
 #endif  
@@ -200,15 +199,15 @@ typedef enum {
 /* USB Device descriptors structure */
 typedef struct
 {
-  uint8_t  *(*GetDeviceDescriptor)( USBD_SpeedTypeDef speed , uint16_t *length);  
-  uint8_t  *(*GetLangIDStrDescriptor)( USBD_SpeedTypeDef speed , uint16_t *length); 
-  uint8_t  *(*GetManufacturerStrDescriptor)( USBD_SpeedTypeDef speed , uint16_t *length);  
-  uint8_t  *(*GetProductStrDescriptor)( USBD_SpeedTypeDef speed , uint16_t *length);  
-  uint8_t  *(*GetSerialStrDescriptor)( USBD_SpeedTypeDef speed , uint16_t *length);  
-  uint8_t  *(*GetConfigurationStrDescriptor)( USBD_SpeedTypeDef speed , uint16_t *length);  
-  uint8_t  *(*GetInterfaceStrDescriptor)( USBD_SpeedTypeDef speed , uint16_t *length); 
+  const uint8_t  *(*GetDeviceDescriptor)( USBD_SpeedTypeDef speed , uint16_t *length);
+  const uint8_t  *(*GetLangIDStrDescriptor)( USBD_SpeedTypeDef speed , uint16_t *length);
+  const uint8_t  *(*GetManufacturerStrDescriptor)( USBD_SpeedTypeDef speed , uint16_t *length);
+  const uint8_t  *(*GetProductStrDescriptor)( USBD_SpeedTypeDef speed , uint16_t *length);
+  const uint8_t  *(*GetSerialStrDescriptor)( USBD_SpeedTypeDef speed , uint16_t *length);
+  const uint8_t  *(*GetConfigurationStrDescriptor)( USBD_SpeedTypeDef speed , uint16_t *length);
+  const uint8_t  *(*GetInterfaceStrDescriptor)( USBD_SpeedTypeDef speed , uint16_t *length);
 #if (USBD_LPM_ENABLED == 1)
-  uint8_t  *(*GetBOSDescriptor)( USBD_SpeedTypeDef speed , uint16_t *length); 
+  uint8_t  *(*GetBOSDescriptor)( USBD_SpeedTypeDef speed , uint16_t *length);
 #endif  
 } USBD_DescriptorsTypeDef;
 
@@ -220,6 +219,16 @@ typedef struct
   uint32_t                rem_length; 
   uint32_t                maxpacket;   
 } USBD_EndpointTypeDef;
+
+//Forward declaration
+typedef PCD_HandleTypeDef PCD_HandleTypeDef;
+struct _USBD_CDC_HandleTypeDef;
+typedef struct _USBD_CDC_HandleTypeDef USBD_CDC_HandleTypeDef;
+typedef struct _USBD_CDC_Itf USBD_CDC_ItfTypeDef;
+struct _USBD_MSC_BOT_HandleTypeDef;
+typedef struct _USBD_MSC_BOT_HandleTypeDef USBD_MSC_BOT_HandleTypeDef;
+struct _USBD_STORAGE;
+typedef struct _USBD_STORAGE USBD_StorageTypeDef;
 
 /* USB Device handle structure */
 typedef struct _USBD_HandleTypeDef
@@ -241,11 +250,15 @@ typedef struct _USBD_HandleTypeDef
   uint32_t                dev_remote_wakeup;
 
   USBD_SetupReqTypedef    request;
-  USBD_DescriptorsTypeDef *pDesc;
-  USBD_ClassTypeDef       *pClass;
-  void                    *pClassData;  
-  void                    *pUserData;    
-  void                    *pData;    
+  const USBD_DescriptorsTypeDef *pDesc;
+  const USBD_ClassTypeDef       *pClass;
+
+  USBD_MSC_BOT_HandleTypeDef    *pClassDataMSC;
+  const USBD_StorageTypeDef     *pClassSpecificInterfaceMSC;
+  USBD_CDC_HandleTypeDef        *pClassDataCDC;
+  const USBD_CDC_ItfTypeDef     *pClassSpecificInterfaceCDC;
+
+  PCD_HandleTypeDef             *pPCDHandle;
 } USBD_HandleTypeDef;
 
 /**

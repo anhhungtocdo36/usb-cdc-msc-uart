@@ -45,10 +45,6 @@
   * @{
   */ 
 
-
-/** @defgroup usbd_cdc_Exported_Defines
-  * @{
-  */ 
 #define CDC_IN_EP                                   0x81  /* EP1 for data IN */
 #define CDC_OUT_EP                                  0x01  /* EP1 for data OUT */
 #define CDC_CMD_EP                                  0x82  /* EP2 for CDC commands */
@@ -64,6 +60,11 @@
 
 #define CDC_DATA_FS_IN_PACKET_SIZE                  CDC_DATA_FS_MAX_PACKET_SIZE
 #define CDC_DATA_FS_OUT_PACKET_SIZE                 CDC_DATA_FS_MAX_PACKET_SIZE
+
+
+/** @defgroup usbd_cdc_Exported_Defines
+  * @{
+  */ 
 
 /*---------------------------------------------------------------------*/
 /*  CDC definitions                                                    */
@@ -108,7 +109,7 @@ typedef struct _USBD_CDC_Itf
 }USBD_CDC_ItfTypeDef;
 
 
-typedef struct
+typedef struct _USBD_CDC_HandleTypeDef
 {
   uint32_t data[CDC_DATA_HS_MAX_PACKET_SIZE/4];      /* Force 32bits alignment */
   uint8_t  CmdOpCode;
@@ -137,8 +138,9 @@ USBD_CDC_HandleTypeDef;
   * @{
   */ 
 
-extern USBD_ClassTypeDef  USBD_CDC;
+extern const USBD_ClassTypeDef  USBD_CDC;
 #define USBD_CDC_CLASS    &USBD_CDC
+
 /**
   * @}
   */ 
@@ -147,7 +149,7 @@ extern USBD_ClassTypeDef  USBD_CDC;
   * @{
   */
 uint8_t  USBD_CDC_RegisterInterface  (USBD_HandleTypeDef   *pdev, 
-                                      USBD_CDC_ItfTypeDef *fops);
+									  const USBD_CDC_ItfTypeDef *fops);
 
 uint8_t  USBD_CDC_SetTxBuffer        (USBD_HandleTypeDef   *pdev,
                                       uint8_t  *pbuff,
@@ -162,6 +164,24 @@ uint8_t  USBD_CDC_TransmitPacket     (USBD_HandleTypeDef *pdev);
 /**
   * @}
   */ 
+
+uint8_t  USBD_CDC_Init (USBD_HandleTypeDef *pdev, 
+                               uint8_t cfgidx);
+
+uint8_t  USBD_CDC_DeInit (USBD_HandleTypeDef *pdev, 
+                                 uint8_t cfgidx);
+
+uint8_t  USBD_CDC_Setup (USBD_HandleTypeDef *pdev, 
+                                USBD_SetupReqTypedef *req);
+
+uint8_t  USBD_CDC_DataIn (USBD_HandleTypeDef *pdev, 
+                                 uint8_t epnum);
+
+uint8_t  USBD_CDC_DataOut (USBD_HandleTypeDef *pdev, 
+                                 uint8_t epnum);
+
+uint8_t  USBD_CDC_EP0_RxReady (USBD_HandleTypeDef *pdev);
+
 
 #ifdef __cplusplus
 }
