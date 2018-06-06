@@ -53,6 +53,7 @@
 #define NULL  0
 #endif
 
+#define USE_USB_COMPOSITE                               1
 
 #define  USB_LEN_DEV_QUALIFIER_DESC                     0x0A
 #define  USB_LEN_DEV_DESC                               0x12
