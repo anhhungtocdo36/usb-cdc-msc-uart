@@ -1,7 +1,8 @@
 Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o: \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
- ../include/usbd_conf.h ../system/include/cmsis/device/stm32f1xx.h \
+ ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_conf.h \
+ ../system/include/cmsis/device/stm32f1xx.h \
  ../system/include/cmsis/device/stm32f103xb.h \
  ../system/include/cmsis/core_cm3.h \
  ../system/include/cmsis/core_cmInstr.h \
@@ -26,14 +27,13 @@ Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o: \
  ../system/include/stm32f1xx/stm32f1xx_ll_usb.h \
  ../system/include/stm32f1xx/stm32f1xx_hal_pcd_ex.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
- ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h
 
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:
 
-../include/usbd_conf.h:
+../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_conf.h:
 
 ../system/include/cmsis/device/stm32f1xx.h:
 
@@ -84,8 +84,6 @@ Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o: \
 ../system/include/stm32f1xx/stm32f1xx_ll_usb.h:
 
 ../system/include/stm32f1xx/stm32f1xx_hal_pcd_ex.h:
-
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:
 
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:
 

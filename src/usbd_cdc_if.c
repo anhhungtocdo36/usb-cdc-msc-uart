@@ -303,7 +303,7 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
 //	memcpy(receiveData,Buf,sizeof(uint8_t)*(*Len));
 //	idx = *Len;
 //	*Len = 0;
-//	CDC_Transmit_FS(Buf,*Len);
+	CDC_Transmit_FS(Buf,*Len);
 //	char buffer[100];
 	//uint8_t len=sprintf(buffer,Buf); //sprintf will return the length of 'buffer'
 	HAL_UART_Transmit(&huart1, Buf, *Len, 100);

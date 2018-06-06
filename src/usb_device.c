@@ -54,6 +54,7 @@
 #include "usbd_desc.h"
 #include "usbd_cdc.h"
 #include "usbd_cdc_if.h"
+#include "usbd_def.h"
 
 /* USER CODE BEGIN Includes */
 
@@ -102,6 +103,8 @@ void MX_USB_DEVICE_Init(void)
   USBD_RegisterClass(&hUsbDeviceFS, &USBD_CDC);
 
   USBD_CDC_RegisterInterface(&hUsbDeviceFS, &USBD_Interface_fops_FS);
+
+  //USBD_MSC_RegisterStorage(&hUsbDeviceFS, &SdMscDriver);
 
   USBD_Start(&hUsbDeviceFS);
 
