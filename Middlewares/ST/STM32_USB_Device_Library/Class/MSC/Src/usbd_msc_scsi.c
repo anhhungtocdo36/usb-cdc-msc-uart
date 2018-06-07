@@ -31,7 +31,7 @@
 #include "usbd_msc.h"
 #include "usbd_msc_data.h"
 
-#include "stm32f1xx_ll_gpio.h"
+#include "stm32f1xx_hal_gpio.h"
 
 extern void serialDebugWrite(const char * fmt, ...);
 extern void serialDebugWriteC(char c);
@@ -518,7 +518,7 @@ static int8_t SCSI_Read10(USBD_HandleTypeDef  *pdev, uint8_t lun , uint8_t *para
                      hmsc->cbw.bLUN, 
                      ILLEGAL_REQUEST, 
                      INVALID_CDB);
-	  serialDebugWrite("Failed at point 1: cbw.dDataLength=%d != scsi_blk_len=%d\n", hmsc->cbw.dDataLength, hmsc->scsi_blk_len);
+	  // serialDebugWrite("Failed at point 1: cbw.dDataLength=%d != scsi_blk_len=%d\n", hmsc->cbw.dDataLength, hmsc->scsi_blk_len);
       return -1;
     }
 
@@ -709,7 +709,7 @@ static int8_t SCSI_ProcessRead (USBD_HandleTypeDef  *pdev, uint8_t lun)
 					   lun,
 					   HARDWARE_ERROR,
 					   UNRECOVERED_READ_ERROR);
-		serialDebugWrite("Faled at point 2\n");
+		// serialDebugWrite("Faled at point 2\n");
 		return -1;
 	}
 
@@ -738,7 +738,7 @@ void cardReadCompletedCB(uint8_t res, void * context)
 					   lun,
 					   HARDWARE_ERROR,
 					   UNRECOVERED_READ_ERROR);
-		serialDebugWrite("Last read operation completed with errors\n");
+		// serialDebugWrite("Last read operation completed with errors\n");
 		return;
 	}
 
@@ -820,7 +820,7 @@ static int8_t SCSI_ProcessWrite (USBD_HandleTypeDef  *pdev, uint8_t lun)
 		pdev->pClassSpecificInterfaceMSC->OnStartOp();
 
 	// Write received data
-	serialDebugWriteC('W');
+	// serialDebugWriteC('W');
 
 	if(pdev->pClassSpecificInterfaceMSC->Write(lun ,
 											   ctxt->buf,
@@ -832,7 +832,7 @@ static int8_t SCSI_ProcessWrite (USBD_HandleTypeDef  *pdev, uint8_t lun)
 					   lun,
 					   HARDWARE_ERROR,
 					   WRITE_FAULT);
-		serialDebugWrite("Write failed at point 1\n");
+		// serialDebugWrite("Write failed at point 1\n");
 		return -1;
 	}
 
@@ -878,7 +878,7 @@ void cardWriteCompletedCB(uint8_t res, void * context)
 					   lun,
 					   HARDWARE_ERROR,
 					   WRITE_FAULT);
-		serialDebugWrite("Write failed at point 2\n");
+		// serialDebugWrite("Write failed at point 2\n");
 		return;
 	}
 

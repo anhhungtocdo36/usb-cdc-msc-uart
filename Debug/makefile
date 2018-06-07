@@ -16,6 +16,8 @@ RM := rm -rf
 -include src/subdir.mk
 -include Middlewares/ST/STM32_USB_Device_Library/Core/Src/subdir.mk
 -include Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/subdir.mk
+-include Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/subdir.mk
+-include Middlewares/ST/STM32_USB_Device_Library/Class/MSC_CDC/Src/subdir.mk
 -include subdir.mk
 -include objects.mk
 

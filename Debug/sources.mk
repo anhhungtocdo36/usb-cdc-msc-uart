@@ -28,6 +28,8 @@ CPP_DEPS :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src \
+Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src \
+Middlewares/ST/STM32_USB_Device_Library/Class/CDC_MSC/Src \
 Middlewares/ST/STM32_USB_Device_Library/Core/Src \
 src \
 system/src/cmsis \

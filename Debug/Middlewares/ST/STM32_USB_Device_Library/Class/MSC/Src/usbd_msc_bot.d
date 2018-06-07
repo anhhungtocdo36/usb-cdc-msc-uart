@@ -1,4 +1,8 @@
-src/usb_device.o: ../src/usb_device.c ../include/usb_device.h \
+Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_bot.o: \
+ ../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_bot.c \
+ ../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc/usbd_msc_bot.h \
+ ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
+ ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_conf.h \
  ../system/include/cmsis/device/stm32f1xx.h \
  ../system/include/cmsis/device/stm32f103xb.h \
  ../system/include/cmsis/core_cm3.h \
@@ -24,22 +28,21 @@ src/usb_device.o: ../src/usb_device.c ../include/usb_device.h \
  ../system/include/stm32f1xx/stm32f1xx_ll_usb.h \
  ../system/include/stm32f1xx/stm32f1xx_hal_pcd_ex.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
- ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_conf.h \
- ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
- ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h \
- ../include/usbd_desc.h \
- ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h \
- ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
- ../include/usbd_cdc_if.h \
- ../Middlewares/ST/STM32_USB_Device_Library/Class/MSC_CDC/Inc/usbd_msc_cdc.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc/usbd_msc.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc/usbd_msc_bot.h \
+ ../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc/usbd_msc_scsi.h \
+ ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
+ ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc/usbd_msc_scsi.h
 
-../include/usb_device.h:
+../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc/usbd_msc_bot.h:
+
+../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:
+
+../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_conf.h:
 
 ../system/include/cmsis/device/stm32f1xx.h:
 
@@ -93,30 +96,20 @@ src/usb_device.o: ../src/usb_device.c ../include/usb_device.h \
 
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:
 
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_conf.h:
-
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:
-
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:
-
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
 
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:
 
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h:
 
-../include/usbd_desc.h:
-
-../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h:
-
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
-
-../include/usbd_cdc_if.h:
-
-../Middlewares/ST/STM32_USB_Device_Library/Class/MSC_CDC/Inc/usbd_msc_cdc.h:
-
 ../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc/usbd_msc.h:
 
 ../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc/usbd_msc_bot.h:
+
+../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc/usbd_msc_scsi.h:
+
+../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:
+
+../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
 
 ../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc/usbd_msc_scsi.h:

@@ -43,7 +43,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_msc.h"
 
-void Error_Handler();
+// void Error_Handler();
 
 // A MSC object
 USBD_MSC_BOT_HandleTypeDef mscObject;
@@ -86,6 +86,7 @@ USBD_MSC_BOT_HandleTypeDef mscObject;
 /** @defgroup MSC_CORE_Private_FunctionPrototypes
   * @{
   */ 
+
 uint8_t  USBD_MSC_Init (USBD_HandleTypeDef *pdev, 
                             uint8_t cfgidx);
 

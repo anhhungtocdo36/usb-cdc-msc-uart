@@ -55,6 +55,8 @@
 #include "usbd_cdc.h"
 #include "usbd_cdc_if.h"
 #include "usbd_def.h"
+#include "usbd_msc_cdc.h"
+#include "usbd_msc.h"
 
 /* USER CODE BEGIN Includes */
 
@@ -72,6 +74,7 @@
 
 /* USB Device Core handle declaration. */
 USBD_HandleTypeDef hUsbDeviceFS;
+USBD_StorageTypeDef SdMscDriver;
 
 /*
  * -- Insert your variables declaration here --
@@ -100,11 +103,12 @@ void MX_USB_DEVICE_Init(void)
   /* Init Device Library, add supported class and start the library. */
   USBD_Init(&hUsbDeviceFS, &FS_Desc, 0);
 
-  USBD_RegisterClass(&hUsbDeviceFS, &USBD_CDC);
+  // USBD_RegisterClass(&hUsbDeviceFS, &USBD_CDC);
+  USBD_RegisterClass(&hUsbDeviceFS, &USBD_MSC_CDC_ClassDriver);
 
   USBD_CDC_RegisterInterface(&hUsbDeviceFS, &USBD_Interface_fops_FS);
 
-  //USBD_MSC_RegisterStorage(&hUsbDeviceFS, &SdMscDriver);
+  // USBD_MSC_RegisterStorage(&hUsbDeviceFS, &SdMscDriver);
 
   USBD_Start(&hUsbDeviceFS);
 
